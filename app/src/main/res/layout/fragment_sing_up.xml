@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SingUpFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SingInFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/avatar_icon_id"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent=".40"
+        app:layout_constraintWidth_percent=".60"
+        android:src="@drawable/avatar_image_placeholder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/nick_name_edittext_id"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        app:layout_constraintTop_toBottomOf="@id/avatar_icon_id"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:width="270dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="@string/enter_your_username"
+        android:textSize="22sp"
+        android:textAlignment="center"
+        app:layout_constraintWidth_percent=".80"
+        />
+    <EditText
+        android:id="@+id/password_edittext_id"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        app:layout_constraintTop_toBottomOf="@id/nick_name_edittext_id"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:width="270dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="@string/enter_your_password"
+        android:textSize="22sp"
+        android:textAlignment="center"
+        app:layout_constraintWidth_percent=".80"
+        />
+    <EditText
+        android:id="@+id/what_i_do_edittext_id"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        app:layout_constraintTop_toBottomOf="@id/password_edittext_id"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:width="270dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="@string/what_i_do"
+        android:textSize="22sp"
+        android:textAlignment="center"
+        app:layout_constraintWidth_percent=".80"
+        />
+    <Button
+        android:id="@+id/sing_up_btn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/what_i_do_edittext_id"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/rounded_button"
+        android:text="Sing Up"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
