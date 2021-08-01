@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(),FragmentActionListener{
     }
 
     private  fun isLoggedIn():Boolean{
-        return false;
+        return true;
     }
 
 
