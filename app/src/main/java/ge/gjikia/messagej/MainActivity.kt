@@ -76,4 +76,8 @@ class MainActivity : AppCompatActivity(),FragmentActionListener{
         TODO("Not yet implemented")
     }
 
+    override fun openSearchPage() {
+        TODO("Not yet implemented")
+    }
+
 }

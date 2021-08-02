@@ -12,6 +12,7 @@ class MainActivity2 : AppCompatActivity(),FragmentActionListener {
     lateinit var  homeFragment: HomeFragment
     lateinit var  chatFragment: ChatFragment
     lateinit var  profileFragment: ProfileFragment
+    lateinit var  searchFragment: SearchFragment
     lateinit var fragmentManager: FragmentManager
     lateinit var fragmentTransaction: FragmentTransaction
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,12 +51,14 @@ class MainActivity2 : AppCompatActivity(),FragmentActionListener {
     }
 
     override fun openSettingPage() {
+        println("### openSettingPage")
         var profileFragment = ProfileFragment.newInstance()
         profileFragment.lister = this
         changeFragment(profileFragment)
     }
 
     override fun openHomePage() {
+        println("#### openHomePage")
         var homeFragment = HomeFragment.newInstance()
         homeFragment.lister = this
         changeFragment(homeFragment)
@@ -63,7 +66,17 @@ class MainActivity2 : AppCompatActivity(),FragmentActionListener {
     }
 
     override fun openChatPage() {
-        println("###### openChatPage #######")
+        println("#### openChatPage")
+        var chatFragment = ChatFragment.newInstance()
+        chatFragment.lister = this
+        changeFragment(chatFragment)
+    }
+
+    override fun openSearchPage() {
+        println("#### openSearchPage")
+        var searchFragment = SearchFragment.newInstance()
+        searchFragment.lister = this
+        changeFragment(searchFragment)
     }
 
 

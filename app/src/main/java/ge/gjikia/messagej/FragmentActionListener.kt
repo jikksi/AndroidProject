@@ -8,5 +8,6 @@ interface FragmentActionListener {
     fun openSettingPage()
     fun openHomePage()
     fun openChatPage()
+    fun openSearchPage()
 
 }
