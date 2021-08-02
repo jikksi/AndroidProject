@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,111 +7,10 @@
     tools:context=".MainActivity"
     android:id="@+id/main_layout"
     android:fitsSystemWindows="true">
-
-    <com.google.android.material.appbar.AppBarLayout
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:fitsSystemWindows="true">
-
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
-            app:title="Grevillea juniperina"
-            app:contentScrim="@color/purple_500"
-            android:fitsSystemWindows="true">
+        android:layout_height="match_parent"/>
 
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/gradient_background"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"/>
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="20dp"
-                >
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_collapseMode="pin"
-                    android:layout_gravity="center"
-                    app:boxBackgroundColor="#d4defd"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp"
-                    app:startIconDrawable="@drawable/ic_baseline_search_24"
-                    app:boxCornerRadiusTopStart="20dp"
-                    app:boxCornerRadiusBottomEnd="20dp"
-                    app:boxCornerRadiusBottomStart="20dp"
-                    app:boxCornerRadiusTopEnd="20dp"
-                    app:boxStrokeColor="@null"
-                    app:placeholderText="Search"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </androidx.appcompat.widget.Toolbar>
-
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="The Partisan Congress riots were attacks on Jews in Bratislava and other towns in the Slovak part of Czechoslovakia between 1 and 6 August 1946. After World War II, former Slovak partisans were often appointed as administrators of property and businesses that had been confiscated from Jews by the previous regime. In May 1946 a law mandating the restitution of these was passed and antisemitic leaflets and attacks on Jews increased. A national congress of former partisans was held in Bratislava on 2–4 August 1946. Rioting began on 1 August and occurred over six days (scene of one attack pictured). Despite police attempts to maintain order, ten apartments were broken into, nineteen people were injured (four seriously), and the Jewish community kitchen was ransacked. Attacks and riots occurred in other Slovak towns. The contemporary press played down the involvement of partisans. In response, the government launched a crackdown on antisemitic incitement and suspended restitution to Jews. (Full article...) "
-                />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-
-
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab_button"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_anchor="@id/bottomAppbar"-->
-<!--        android:layout_margin="16dp"/>-->
-
-<!--    <com.google.android.material.bottomappbar.BottomAppBar-->
-<!--        android:id="@+id/bottomAppbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="?attr/actionBarSize"-->
-<!--        android:layout_gravity="bottom"-->
-<!--        app:fabAlignmentMode="end"-->
-<!--        app:hideOnScroll="true"-->
-<!--        app:menu="@menu/app_bar_meu"/>-->
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

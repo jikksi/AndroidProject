@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity(),FragmentActionListener{
     lateinit var singUpFragment: SingUpFragment
     lateinit var fragmentManager: FragmentManager
     lateinit var fragmentTransaction: FragmentTransaction
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -61,6 +62,18 @@ class MainActivity : AppCompatActivity(),FragmentActionListener{
 
     override fun signUp() {
         println("####### signUp ##########")
+    }
+
+    override fun openSettingPage() {
+        TODO("Not yet implemented")
+    }
+
+    override fun openHomePage() {
+        TODO("Not yet implemented")
+    }
+
+    override fun openChatPage() {
+        TODO("Not yet implemented")
     }
 
 }
