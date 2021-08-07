@@ -120,9 +120,7 @@ class ChatFragment : Fragment() {
                         if((message.recipient_id == key && message.sender_id == signedKey)|| (message.recipient_id == signedKey && message.sender_id == key)){
                             println("############# add ##############")
                             list.add(message)
-                            list.sortedByDescending {
-                                it.date
-                            }
+                            list.sortDescending();
                         }
                         adapter.notifyDataSetChanged()
                     }
@@ -166,8 +164,9 @@ class ChatFragment : Fragment() {
         textInputLayout.setEndIconOnClickListener{
             val currentDateTime = LocalDateTime.now()
             val text = textInputEditText.text
-            Database.createChat(Message(currentDateTime.format(DateTimeFormatter.ofPattern("HH:mm")),text.toString(),key,signedKey))
+            Database.createChat(Message(currentDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),text.toString(),key,signedKey))
             textInputEditText.setText("")
+            adapter
         }
     }
 

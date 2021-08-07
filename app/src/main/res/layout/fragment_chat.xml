@@ -36,8 +36,10 @@
         android:id="@+id/my_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_anchor="@+id/my_list"
+        app:layout_anchorGravity="center"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppbar"

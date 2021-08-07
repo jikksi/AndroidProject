@@ -63,12 +63,12 @@ class ChatListAdapter(private val dataSet: ArrayList<Message>,private val signed
             viewHolder.reciversView?.visibility = View.VISIBLE
             viewHolder.sendersView?.visibility = View.GONE
             viewHolder.recieversMessageTextView?.setText(message.message)
-            viewHolder.recieversDateTextView?.setText(message.date)
+            viewHolder.recieversDateTextView?.setText(message.date?.split(" ")?.get(1))
         }else{
             viewHolder.sendersView?.visibility = View.VISIBLE
             viewHolder.reciversView?.visibility = View.GONE
             viewHolder.senderMessageTextView?.setText(message.message)
-            viewHolder.sendersDateTextView?.setText(message.date)
+            viewHolder.sendersDateTextView?.setText(message.date?.split(" ")?.get(1))
             println("############ {${message.message}} #########")
         }
 
