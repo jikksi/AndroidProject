@@ -22,6 +22,7 @@ class HomeFragment : Fragment() {
     lateinit var lister: FragmentActionListener;
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var floatingActionButton: FloatingActionButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -38,6 +39,7 @@ class ProfileFragment : Fragment() {
     lateinit var whatIdDo : String
     lateinit var nickEdit : EditText;
     lateinit var whatIDoEdit: EditText;
+    lateinit var floatingActionButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +101,13 @@ class ProfileFragment : Fragment() {
             val account = Firebase.database.getReference("accounts").child(key);
             account.child("nickName").setValue(nickEdit.text.toString())
             account.child("whatIDo").setValue(whatIDoEdit.text.toString())
+        }
+
+        floatingActionButton = view.findViewById(R.id.fab_button)
+        setNavigationItemListeners()
+
+        floatingActionButton.setOnClickListener{
+            lister.openSearchPage()
         }
     }
 

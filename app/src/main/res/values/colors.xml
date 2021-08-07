@@ -10,4 +10,5 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="button_color_blue">#5479f1</color>
     <color name="outlined_button_color">#201F1F</color>
+    <color name="title">#252525</color>
 </resources>
