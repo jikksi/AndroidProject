@@ -9,9 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ge.gjikia.messagej.Account
+import ge.gjikia.messagej.FragmentActionListener
 import ge.gjikia.messagej.R
 
-class SearchListAdapter(private val dataSet: ArrayList<Account>) :
+class SearchListAdapter(private val dataSet: ArrayList<Account>,private val listener: FragmentActionListener) :
     RecyclerView.Adapter<SearchListAdapter.ViewHolder>() {
     /**
      * Provide a reference to the type of views that you are using
@@ -49,7 +50,7 @@ class SearchListAdapter(private val dataSet: ArrayList<Account>) :
         viewHolder.itemView.setOnClickListener{
             val id = dataSet[position].id
             println("########### $id ##############")
-
+            listener.openChatPage(id)
         }
     }
 

@@ -70,9 +70,9 @@ class MainActivity2 : AppCompatActivity(),FragmentActionListener {
 
     }
 
-    override fun openChatPage() {
+    override fun openChatPage(id: String?) {
         println("#### openChatPage")
-        var chatFragment = ChatFragment.newInstance()
+        var chatFragment = ChatFragment.newInstance(id!!)
         chatFragment.lister = this
         changeFragment(chatFragment)
     }

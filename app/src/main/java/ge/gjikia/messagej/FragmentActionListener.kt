@@ -7,7 +7,7 @@ interface FragmentActionListener {
     fun signUp(key : String?)
     fun openSettingPage()
     fun openHomePage()
-    fun openChatPage()
+    fun openChatPage(id : String?)
     fun openSearchPage()
     fun  signOut();
 

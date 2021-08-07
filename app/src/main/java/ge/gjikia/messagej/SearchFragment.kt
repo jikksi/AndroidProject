@@ -94,7 +94,7 @@ class SearchFragment : Fragment() {
         recycler = view.findViewById(R.id.my_list)
         recycler.layoutManager = LinearLayoutManager(this.context)
         list = ArrayList()
-        adapter = SearchListAdapter(list)
+        adapter = SearchListAdapter(list,lister)
         recycler.adapter = adapter;
         imageButton.setOnClickListener {
             lister.openHomePage()

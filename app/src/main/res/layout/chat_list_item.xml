@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/senders_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:visibility="gone"
+        >
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/senders_text_input_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:boxBackgroundColor="#5479f1"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxStrokeColor="@null"
+            android:focusable="true"
+            app:layout_constraintWidth_percent="0.7"
+            app:layout_constraintHeight_percent="0.7"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/senders_search_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:textAlignment="center"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/senders_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="12:30"
+            app:layout_constraintTop_toTopOf="@id/senders_text_input_layout"
+            app:layout_constraintBottom_toBottomOf="@id/senders_text_input_layout"
+            app:layout_constraintEnd_toStartOf="@id/senders_text_input_layout"
+            android:layout_marginRight="10dp"
+            android:textSize="17sp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/recievers_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/recievers_text_input_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:boxBackgroundColor="#f4f6ff"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxStrokeColor="@null"
+            android:focusable="false"
+            app:layout_constraintWidth_percent="0.7"
+            app:layout_constraintHeight_percent="0.7"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reciebers_message_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:textAlignment="center"
+                android:textColor="#606b8e"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/recievers_date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="12:30"
+            app:layout_constraintTop_toTopOf="@id/recievers_text_input_layout"
+            app:layout_constraintBottom_toBottomOf="@id/recievers_text_input_layout"
+            app:layout_constraintStart_toEndOf="@id/recievers_text_input_layout"
+            android:layout_marginLeft="10dp"
+            android:textSize="17sp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

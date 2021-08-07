@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity(),FragmentActionListener{
         TODO("Not yet implemented")
     }
 
-    override fun openChatPage() {
+    override fun openChatPage(id: String?) {
         TODO("Not yet implemented")
     }
 
