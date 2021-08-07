@@ -1,11 +1,14 @@
 package ge.gjikia.messagej
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,6 +27,9 @@ class SingUpFragment : Fragment() {
     lateinit var signInBtn:Button
     lateinit var signUpBtn:Button
     lateinit var lister: FragmentActionListener;
+    lateinit var nickname:EditText;
+    lateinit var password:EditText;
+    lateinit var whatIDo :EditText;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +50,9 @@ class SingUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         signUpBtn = view.findViewById(R.id.sing_up_btn);
+        nickname = view.findViewById(R.id.nick_name_edittext_id);
+        password = view.findViewById(R.id.password_edittext_id);
+        whatIDo = view.findViewById(R.id.what_i_do_edittext_id);
         setListeners()
     }
 
@@ -51,7 +60,16 @@ class SingUpFragment : Fragment() {
 
     private  fun  setListeners(){
         signUpBtn.setOnClickListener {
-            lister.signUp();
+            val nickname = nickname.text.toString()
+            val password  = password.text.toString()
+            val whatIDo = whatIDo.text.toString()
+            if(nickname == "")Toast.makeText(this.context,"nickname  required!",Toast.LENGTH_LONG).show();
+            if(password == "")Toast.makeText(this.context,"Password  required!",Toast.LENGTH_LONG).show();
+            if(whatIDo == "")Toast.makeText(this.context,"What i do  required!",Toast.LENGTH_LONG).show();
+            val key = Database.createAccount(Account(nickname,password,whatIDo));
+            key?.let {
+                lister.signUp(it);
+            }
         }
     }
 

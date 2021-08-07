@@ -1,5 +1,8 @@
 package ge.gjikia.messagej
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +18,7 @@ class MainActivity2 : AppCompatActivity(),FragmentActionListener {
     lateinit var  searchFragment: SearchFragment
     lateinit var fragmentManager: FragmentManager
     lateinit var fragmentTransaction: FragmentTransaction
+    lateinit var sharedPref: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
@@ -26,6 +30,7 @@ class MainActivity2 : AppCompatActivity(),FragmentActionListener {
 
     private  fun init(){
         fragmentManager = supportFragmentManager
+        sharedPref = this.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
     }
 
     private fun changeFragment(fragment:Fragment){
@@ -42,11 +47,11 @@ class MainActivity2 : AppCompatActivity(),FragmentActionListener {
 
     }
 
-    override fun signIn() {
+    override fun signIn(key: String?) {
 
     }
 
-    override fun signUp() {
+    override fun signUp(key: String?) {
 
     }
 
@@ -77,6 +82,19 @@ class MainActivity2 : AppCompatActivity(),FragmentActionListener {
         var searchFragment = SearchFragment.newInstance()
         searchFragment.lister = this
         changeFragment(searchFragment)
+    }
+
+    override fun signOut() {
+        with(sharedPref.edit()){
+            putString("id",null)
+            apply();
+            logOut()
+        }
+    }
+
+    private fun logOut(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
 

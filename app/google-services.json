@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "442018757991",
+    "firebase_url": "https://messagej-88969-default-rtdb.firebaseio.com",
+    "project_id": "messagej-88969",
+    "storage_bucket": "messagej-88969.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442018757991:android:c802fceeb3a154defa43c2",
+        "android_client_info": {
+          "package_name": "ge.gjikia.messagej"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "442018757991-pn8bkt01tu7i4n7545j72egts2gmtne2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABvOb3dJ2gx5DJYAXUvQakrKO0uOPN75c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "442018757991-pn8bkt01tu7i4n7545j72egts2gmtne2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

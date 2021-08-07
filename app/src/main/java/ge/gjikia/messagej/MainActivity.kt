@@ -1,11 +1,22 @@
 package ge.gjikia.messagej
-
+import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.google.firebase.FirebaseApp
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity(),FragmentActionListener{
 
@@ -13,14 +24,16 @@ class MainActivity : AppCompatActivity(),FragmentActionListener{
     lateinit var singUpFragment: SingUpFragment
     lateinit var fragmentManager: FragmentManager
     lateinit var fragmentTransaction: FragmentTransaction
+    lateinit var accountId : String
+    lateinit var sharedPref:SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        sharedPref = this.getSharedPreferences("MyPref", Context.MODE_PRIVATE)
+
         if(isLoggedIn()){
-            val intent = Intent(this, MainActivity2::class.java)
-            // start your next activity
-            startActivity(intent)
+           logIn()
         }else{
             init()
             changeFragment(singInFragment)
@@ -28,7 +41,14 @@ class MainActivity : AppCompatActivity(),FragmentActionListener{
     }
 
     private  fun isLoggedIn():Boolean{
-        return true;
+
+        val id = sharedPref.getString("id",null);
+        println("####### $id ###########}")
+        id?.let {
+            accountId = it
+            println("####### $accountId ###########}")
+        }
+        return id != null;
     }
 
 
@@ -56,12 +76,15 @@ class MainActivity : AppCompatActivity(),FragmentActionListener{
         changeFragment(singInFragment)
     }
 
-    override fun signIn() {
-        println("####### SignIn ##########")
+    override fun signIn(key: String?) {
+        saveKey(key);
+        logIn();
     }
 
-    override fun signUp() {
+    override fun signUp(key : String?) {
         println("####### signUp ##########")
+        saveKey(key);
+        logIn()
     }
 
     override fun openSettingPage() {
@@ -78,6 +101,24 @@ class MainActivity : AppCompatActivity(),FragmentActionListener{
 
     override fun openSearchPage() {
         TODO("Not yet implemented")
+    }
+
+    override fun signOut() {
+        TODO("Not yet implemented")
+    }
+
+    private  fun  logIn(){
+        val intent = Intent(this, MainActivity2::class.java)
+        startActivity(intent)
+    }
+
+    private fun  saveKey(key : String?){
+        key?.let {
+            with(sharedPref.edit()){
+                putString("id",it)
+                apply()
+            }
+        }
     }
 
 }
