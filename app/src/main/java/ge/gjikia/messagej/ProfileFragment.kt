@@ -1,7 +1,10 @@
 package ge.gjikia.messagej
 
+import android.app.Activity.RESULT_OK
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
@@ -16,6 +20,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,6 +33,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProfileFragment : Fragment() {
+
+
+    val PICK_IMAGE_REQUESR = 1
+    lateinit var imageUri : Uri
+
     lateinit var lister: FragmentActionListener;
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var signOut:Button;
@@ -40,6 +50,7 @@ class ProfileFragment : Fragment() {
     lateinit var nickEdit : EditText;
     lateinit var whatIDoEdit: EditText;
     lateinit var floatingActionButton: FloatingActionButton
+    lateinit var imageView:ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,6 +119,29 @@ class ProfileFragment : Fragment() {
 
         floatingActionButton.setOnClickListener{
             lister.openSearchPage()
+        }
+
+        imageView = view.findViewById(R.id.avatar_icon_id)
+
+        imageView.setOnClickListener{
+            openFileChooser()
+        }
+    }
+
+    private fun openFileChooser(){
+        val intent = Intent()
+        intent.setType("image/*")
+        intent.setAction(Intent.ACTION_GET_CONTENT)
+        startActivityForResult(intent,PICK_IMAGE_REQUESR)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == PICK_IMAGE_REQUESR &&
+            resultCode == RESULT_OK &&
+            data != null && data.data != null ){
+            imageUri = data.data as Uri
+            Picasso.get().load(imageUri).fit().into(imageView)
         }
     }
 
