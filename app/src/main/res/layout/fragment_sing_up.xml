@@ -47,6 +47,7 @@
         android:textSize="22sp"
         android:textAlignment="center"
         app:layout_constraintWidth_percent=".80"
+        android:inputType="textPassword"
         />
     <EditText
         android:id="@+id/what_i_do_edittext_id"

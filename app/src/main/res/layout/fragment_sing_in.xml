@@ -47,6 +47,8 @@
         android:textSize="22sp"
         android:textAlignment="center"
         app:layout_constraintWidth_percent=".80"
+        android:inputType="textPassword"
+
         />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sing_in_btn"
