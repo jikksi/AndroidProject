@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ChatFragment">
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:fitsSystemWindows="true"
@@ -33,54 +35,65 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+        app:layout_constraintBottom_toTopOf="@id/bottom_app_bar_layout"
         android:id="@+id/my_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_anchor="@+id/my_list"
         app:layout_anchorGravity="center"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppbar"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/bottom_app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="bottom"
-        app:fabAlignmentMode="center"
-        app:hideOnScroll="true"
-        android:background="@color/white"
-        android:layout_marginBottom="8dp"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         >
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_input_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppbar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:layout_collapseMode="pin"
-            app:boxBackgroundColor="#d4defd"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"
-            app:boxCornerRadiusTopStart="30dp"
-            app:boxCornerRadiusBottomEnd="30dp"
-            app:boxCornerRadiusBottomStart="30dp"
-            app:boxCornerRadiusTopEnd="30dp"
-            app:boxStrokeColor="@null"
-            app:placeholderText="Search"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            app:endIconDrawable="@drawable/ic_baseline_brightness_1_24"
-            app:endIconContentDescription="@string/gcm_defaultSenderId"
-            app:endIconMode="custom"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:fabAlignmentMode="center"
+            app:hideOnScroll="true"
+            android:background="@color/white"
+            android:layout_marginBottom="8dp"
             >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_edit_text"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="@string/message"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="60dp"
+                app:layout_collapseMode="pin"
+                app:boxBackgroundColor="#d4defd"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                app:boxCornerRadiusTopStart="30dp"
+                app:boxCornerRadiusBottomEnd="30dp"
+                app:boxCornerRadiusBottomStart="30dp"
+                app:boxCornerRadiusTopEnd="30dp"
+                app:boxStrokeColor="@null"
+                app:placeholderText="Search"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                app:endIconDrawable="@drawable/ic_baseline_brightness_1_24"
+                app:endIconContentDescription="@string/gcm_defaultSenderId"
+                app:endIconMode="custom"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/search_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/message"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.bottomappbar.BottomAppBar>
+        </com.google.android.material.bottomappbar.BottomAppBar>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

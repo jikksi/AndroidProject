@@ -80,51 +80,30 @@ class ChatFragment : Fragment() {
 
         val chatHistory : Query  = Firebase.database.getReference("chats");
 
-//        chatHistory.addChildEventListener(object : ChildEventListener{
-//            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-//                if (snapshot.exists()) {
-//                    println("########## chatHistory snapshot.exists() #########")
-//                    for (snapshot in snapshot.getChildren()) {
-////                        val message: Message = snapshot.getValue(Message::class.java)!!
-//                        val message = snapshot.child("message")
-//
-//                        println("############ ${snapshot.toString()} ###########")
-//                    }
-//                }
-//            }
-//
-//            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onChildRemoved(snapshot: DataSnapshot) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
-
-        chatHistory.addListenerForSingleValueEvent(object  : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
+        chatHistory.addChildEventListener(object : ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 if (snapshot.exists()) {
-                    println("########## snapshot.exists() #########")
-                    for (snapshot in snapshot.getChildren()) {
-                        val message: Message = snapshot.getValue(Message::class.java)!!
-                        if((message.recipient_id == key && message.sender_id == signedKey)|| (message.recipient_id == signedKey && message.sender_id == key)){
-                            println("############# add ##############")
-                            list.add(message)
-                            list.sortDescending();
-                        }
-                        adapter.notifyDataSetChanged()
+                    val message: Message = snapshot.getValue(Message::class.java)!!
+                    if((message.recipient_id == key && message.sender_id == signedKey)|| (message.recipient_id == signedKey && message.sender_id == key)){
+                        println("############# add ##############")
+                        list.add(message)
+                        list.sortDescending();
                     }
+                    adapter.notifyDataSetChanged()
+                    recycler.scrollToPosition(list.size - 1)
                 }
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                TODO("Not yet implemented")
             }
 
             override fun onCancelled(error: DatabaseError) {

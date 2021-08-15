@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/senders_view"
@@ -17,7 +21,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:boxBackgroundColor="#5479f1"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -27,14 +31,14 @@
             app:boxStrokeColor="@null"
             android:focusable="true"
             app:layout_constraintWidth_percent="0.7"
-            app:layout_constraintHeight_percent="0.7"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/senders_search_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@null"
                 android:textAlignment="center"
+
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,7 +68,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             app:boxBackgroundColor="#f4f6ff"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
@@ -74,15 +78,15 @@
             app:boxStrokeColor="@null"
             android:focusable="false"
             app:layout_constraintWidth_percent="0.7"
-            app:layout_constraintHeight_percent="0.7"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/reciebers_message_text_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@null"
                 android:textAlignment="center"
                 android:textColor="#606b8e"
+
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
