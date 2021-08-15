@@ -32,12 +32,8 @@ class ChatListAdapter(private val dataSet: ArrayList<Message>,private val signed
         init {
             sendersView = view.findViewById(R.id.senders_view)
             reciversView = view.findViewById(R.id.recievers_view)
-
-
             recieversMessageTextView = view.findViewById(R.id.reciebers_message_text_view)
             senderMessageTextView = view.findViewById(R.id.senders_search_edit_text)
-
-
             recieversDateTextView = view.findViewById(R.id.recievers_date_text_view)
             sendersDateTextView = view.findViewById(R.id.senders_date_text_view)
         }
