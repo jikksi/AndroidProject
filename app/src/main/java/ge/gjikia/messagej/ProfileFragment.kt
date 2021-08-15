@@ -1,6 +1,7 @@
 package ge.gjikia.messagej
 
 import android.app.Activity.RESULT_OK
+import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.MimeTypeMap
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -20,6 +22,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import com.squareup.picasso.Picasso
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,7 +41,7 @@ class ProfileFragment : Fragment() {
 
     val PICK_IMAGE_REQUESR = 1
     lateinit var imageUri : Uri
-
+    lateinit var storage:FirebaseStorage
     lateinit var lister: FragmentActionListener;
     lateinit var bottomNavigationView: BottomNavigationView
     lateinit var signOut:Button;
@@ -54,6 +58,8 @@ class ProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        storage = Firebase.storage
         sharedPref = requireActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE)
         key = sharedPref.getString("id",null).toString()
         println("############ $key ##############")
@@ -74,6 +80,12 @@ class ProfileFragment : Fragment() {
                 }
 
             })
+        }
+        val fileRef = storage.getReference("images").child("$key")
+        fileRef.downloadUrl.addOnSuccessListener {
+            Picasso.get().load(it).into(imageView)
+        }.addOnFailureListener{
+            imageView?.setBackgroundResource(R.drawable.avatar_image_placeholder)
         }
 
     }
@@ -112,6 +124,19 @@ class ProfileFragment : Fragment() {
             val account = Firebase.database.getReference("accounts").child(key);
             account.child("nickName").setValue(nickEdit.text.toString())
             account.child("whatIDo").setValue(whatIDoEdit.text.toString())
+
+
+            if(imageUri != null){
+                println("####### update ############")
+                val mime = getFileExtension(imageUri)
+                val fileRef = storage.getReference("images").child("$key")
+                fileRef.putFile(imageUri).addOnSuccessListener {
+                    println("####### uploaded ############")
+                }.addOnFailureListener {
+
+                }
+            }
+
         }
 
         floatingActionButton = view.findViewById(R.id.fab_button)
@@ -133,6 +158,10 @@ class ProfileFragment : Fragment() {
         intent.setType("image/*")
         intent.setAction(Intent.ACTION_GET_CONTENT)
         startActivityForResult(intent,PICK_IMAGE_REQUESR)
+    }
+
+    private fun getFileExtension(uri: Uri):String?{
+        return MimeTypeMap.getSingleton().getExtensionFromMimeType(activity?.contentResolver?.getType(uri))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

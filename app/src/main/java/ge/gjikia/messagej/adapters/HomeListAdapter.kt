@@ -13,6 +13,8 @@ import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.squareup.picasso.Picasso
 import ge.gjikia.messagej.Account
 import ge.gjikia.messagej.FragmentActionListener
 import ge.gjikia.messagej.Message
@@ -75,6 +77,13 @@ class HomeListAdapter(private val dataSet: ArrayList<Message>, private val signe
         val validKey =  if (signedKey == message.recipient_id) message.sender_id else message.recipient_id
         viewHolder.itemView.setOnClickListener{
             listener.openChatPage(validKey)
+        }
+        val storage = Firebase.storage
+        val fileRef = storage.getReference("images").child("$validKey")
+        fileRef.downloadUrl.addOnSuccessListener {
+            Picasso.get().load(it).into(viewHolder.imageView)
+        }.addOnFailureListener{
+            viewHolder.imageView?.setBackgroundResource(R.drawable.avatar_image_placeholder)
         }
     }
 

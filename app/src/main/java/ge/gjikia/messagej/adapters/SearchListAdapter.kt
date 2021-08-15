@@ -8,6 +8,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import com.squareup.picasso.Picasso
 import ge.gjikia.messagej.Account
 import ge.gjikia.messagej.FragmentActionListener
 import ge.gjikia.messagej.R
@@ -46,9 +50,17 @@ class SearchListAdapter(private val dataSet: ArrayList<Account>,private val list
         // contents of the view with that element
         viewHolder.nicknameTextView?.setText(dataSet[position].nickName)
         viewHolder.whatIDo?.setText(dataSet[position].whatIDo)
-        viewHolder.imageView?.setBackgroundResource(R.drawable.avatar_image_placeholder)
+        val storage = Firebase.storage
+        val id = dataSet[position].id
+        val fileRef = storage.getReference("images").child("$id")
+        fileRef.downloadUrl.addOnSuccessListener {
+            Picasso.get().load(it).into(viewHolder.imageView)
+        }.addOnFailureListener{
+            viewHolder.imageView?.setBackgroundResource(R.drawable.avatar_image_placeholder)
+        }
+
+
         viewHolder.itemView.setOnClickListener{
-            val id = dataSet[position].id
             println("########### $id ##############")
             listener.openChatPage(id)
         }

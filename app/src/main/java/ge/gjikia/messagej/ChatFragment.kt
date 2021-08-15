@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
@@ -18,6 +19,8 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import com.squareup.picasso.Picasso
 import ge.gjikia.messagej.adapters.ChatListAdapter
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -44,6 +47,7 @@ class ChatFragment : Fragment() {
     lateinit var signedKey : String
     lateinit var textInputEditText: TextInputEditText;
     lateinit var textInputLayout: TextInputLayout
+    lateinit var imageView:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -52,6 +56,13 @@ class ChatFragment : Fragment() {
 
         sharedPref = requireActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE)
         signedKey = sharedPref.getString("id",null).toString()
+        val storage = Firebase.storage
+        val fileRef = storage.getReference("images").child("$key")
+        fileRef.downloadUrl.addOnSuccessListener {
+            Picasso.get().load(it).into(imageView)
+        }.addOnFailureListener{
+            imageView?.setBackgroundResource(R.drawable.avatar_image_placeholder)
+        }
 
         val query: Query = Firebase.database.getReference("accounts")
             .orderByKey()
@@ -131,6 +142,7 @@ class ChatFragment : Fragment() {
         materialToolbar.setNavigationOnClickListener{
             lister.openHomePage()
         }
+        imageView = view.findViewById(R.id.image_view)
 
         list = ArrayList()
         recycler = view.findViewById(R.id.my_list)
