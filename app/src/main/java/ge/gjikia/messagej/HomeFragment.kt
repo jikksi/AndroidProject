@@ -1,8 +1,11 @@
 package ge.gjikia.messagej
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.Query
+import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import ge.gjikia.messagej.adapters.ChatListAdapter
@@ -39,6 +40,7 @@ class HomeFragment : Fragment() {
     lateinit var signedKey : String
     lateinit var sharedPref: SharedPreferences
     lateinit var adapter: HomeListAdapter
+    lateinit var searchInput : TextInputEditText;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -117,6 +119,80 @@ class HomeFragment : Fragment() {
         recycler.layoutManager = LinearLayoutManager(this.context)
         adapter = HomeListAdapter(list,signedKey,lister)
         recycler.adapter = adapter
+
+
+        searchInput = view.findViewById(R.id.search_edit_text)
+
+        searchInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val text = s.toString()
+                list.clear()
+                val chatHistory : Query = Firebase.database.getReference("chats")
+                chatHistory.addChildEventListener(object : ChildEventListener {
+                    override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                        if (snapshot.exists()) {
+                            val message: Message = snapshot.getValue(Message::class.java)!!
+                            if(message.recipient_id == signedKey || message.sender_id == signedKey){
+                                println("############# add ##############")
+                                val validKey =  if (signedKey == message.recipient_id) message.sender_id else message.recipient_id
+                                val query: Query = Firebase.database.getReference("accounts")
+                                    .orderByKey()
+                                    .equalTo(validKey);
+                                println("####################### $validKey #########################")
+                                query.addListenerForSingleValueEvent(object : ValueEventListener {
+                                    @SuppressLint("NotifyDataSetChanged")
+                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                        if (snapshot.exists()) {
+                                            println("########## snapshot.exists() #########")
+                                            for (snapshot in snapshot.getChildren()) {
+                                                val account: Account = snapshot.getValue(Account::class.java)!!
+                                                if(account.nickName?.contains(text) == true){
+                                                    addItem(message)
+                                                    list.sort();
+                                                }
+                                                println("################## {${account.nickName}}")
+                                            }
+                                        }
+                                        adapter.notifyDataSetChanged()
+                                    }
+
+                                    override fun onCancelled(error: DatabaseError) {
+
+                                    }
+                                })
+                            }
+
+                        }
+                    }
+
+                    override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                        TODO("Not yet implemented")
+                    }
+
+                    override fun onChildRemoved(snapshot: DataSnapshot) {
+                        TODO("Not yet implemented")
+                    }
+
+                    override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                        TODO("Not yet implemented")
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
+            }
+
+        })
     }
 
 

@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHeight_percent="0.6"
         android:background="@drawable/avatar_image_placeholder"
         android:layout_marginTop="3dp"
         android:layout_marginLeft="20dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/time_passed_text_view"
         tools:text="Giorgi Jikia"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:layout_marginLeft="20dp"
         android:textColor="@color/title"
         />
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         tools:text="1 hour"
         android:layout_marginRight="10dp"
-        android:textSize="15sp"
+        android:textSize="17sp"
         />
     
     <TextView
@@ -53,6 +53,7 @@
         app:layout_constraintTop_toBottomOf="@id/nick_name_text_view"
         app:layout_constraintStart_toStartOf="@id/nick_name_text_view"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="17sp"
         tools:text="სატესტო ტექსტი იმისათვის რომ შევამოწმო რამდენად სწორედ მუშაობს"
         android:ellipsize="end"
         android:maxLines="2"
